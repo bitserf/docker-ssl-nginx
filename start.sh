@@ -24,7 +24,7 @@ echo "  * Host Web Path:           ${HOST_WEB_PATH}"
 echo "  * SSL Certificates & Keys: ${HOST_SSL_PATH}"
 docker run -p 80:80 \
            -p 443:443 \
-           --add-host=local:$(hostname -I | cut -d' ' -f1)
+           --add-host=local:$(hostname -I | cut -d' ' -f1) \
            -v ${HOST_WEB_PATH}:/web \
            -v ${HOST_SSL_PATH}:/ssl \
            -d \
