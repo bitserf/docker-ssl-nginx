@@ -1,6 +1,7 @@
 #!/bin/bash
 
-HOST_WEB_PATH="/volumes/web"
+HOST_WEB_PATH="/web"
+HOST_APP_PATH="/apps"
 HOST_SSL_PATH="/etc/letsencrypt"
 
 [ -f "${HOST_WEB_PATH}/config/nginx.conf" ] || {
@@ -24,9 +25,10 @@ echo "  * Host Web Path:           ${HOST_WEB_PATH}"
 echo "  * SSL Certificates & Keys: ${HOST_SSL_PATH}"
 docker run -p 80:80 \
            -p 443:443 \
-           --add-host=local:$(hostname -I | cut -d' ' -f1) \
            --name web1 \
+           --link app1 \
            -v ${HOST_WEB_PATH}:/web \
+           -v ${HOST_APP_PATH}:/apps \
            -v ${HOST_SSL_PATH}:/ssl \
            -d \
            --restart always \

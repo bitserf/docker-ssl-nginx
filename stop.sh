@@ -8,3 +8,4 @@ CONTAINER=$(docker ps | grep ssl-nginx | awk '{print $1}')
 }
 
 docker stop ${CONTAINER}
+docker rm ${CONTAINER}
